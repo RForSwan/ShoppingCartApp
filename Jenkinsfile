@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'MAVEN_HOME'
+    }
+
     environment {
           PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
           DOCKERHUB_CREDENTIALS_ID = 'docker_hub'
@@ -11,7 +15,7 @@ pipeline {
     stages {
         stage('check') {
             steps {
-                git branch: 'main',
+                git branch: 'master',
                         url: 'https://github.com/RForSwan/ShoppingCartApp'
             }
         }
