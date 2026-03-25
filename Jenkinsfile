@@ -17,12 +17,12 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh 'mvn install'
+                bat 'mvn clean install'
             }
         }
         stage('report') {
             steps {
-                sh 'mvn jacoco:report'
+                bat 'mvn jacoco:report'
 
             }
         }
