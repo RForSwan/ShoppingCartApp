@@ -1,6 +1,8 @@
 FROM maven:3.9.12
 LABEL authors = "RForSwan"
 
+COPY target/opt2.jar /app/opt2.jar
+
 WORKDIR /app
 
 COPY pom.xml .
