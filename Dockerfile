@@ -9,4 +9,4 @@ COPY . /app
 
 RUN mvn -DskipTests package
 
-CMD ["java", "-jar", "target/opt2.jar"]
+CMD ["java", "-jar", "target/ShoppingCartApp-1.0-SNAPSHOT.jar"]
