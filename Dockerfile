@@ -1,4 +1,4 @@
-FROM MAVEN:3.9.12
+FROM maven:3.9.12
 LABEL authors = "RForSwan"
 
 WORKDIR /app
