@@ -38,25 +38,18 @@ pipeline {
         }
         stage('Build Docker image') {
             steps {
-                sh '''
-         docker build \
-           -t ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG} \
-           .
-         '''
+                script{
+                    docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(
-                        credentialsId: "${DOCKERHUB_CREDENTIALS_ID}",
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_PASS'
-                )]) {
-                    sh '''
-                 echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                 docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}
-             '''
+                script {
+                  docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
+                      docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                  }
                 }
             }
         }
